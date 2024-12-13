@@ -9,6 +9,11 @@ const User=require("./router/user")
 
 const book=require("./router/book")
 
+app.use(cors({
+  origin: ["https://bookstore-neon-nu.vercel.app"],
+  methods: ["POST", "GET"],
+  credentials: true
+}));
 
 
 app.use(express.json())
