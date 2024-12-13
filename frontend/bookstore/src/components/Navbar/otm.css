@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navbar{
+    background-color: rgb(39 39 42);
+  padding: 20px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+    color: white;
+    position: relative;
+}
+.logo{
+   display: flex;
+    font-family: "Poppins", sans-serif;
+    align-items: center;
+    font-weight: 00;
+    font-style: normal;
+    margin-left: 1%;
+    text-decoration: none;
+    color: white;
+   
+
+}
+.logo img{
+    width: 50px;
+    height: 50px;
+}
+.logo h3{
+    margin-left: 8%;
+}
+
+.h{
+    display: flex;
+    gap: 28px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    align-items: center;
+
+
+}
+.menu{
+    text-decoration: none;
+    color: white;
+}
+
+.menu:hover{
+color: rgb(56, 154, 239);
+    cursor: pointer;
+    
+}
+.Links{
+    display: flex;
+    gap: 18px;
+}
+
+.btns{
+    display: flex;
+    gap: 8px;
+    
+}
+.sign-in{
+   border: 1px solid rgb(57, 73, 255);
+   color: white;
+    background: none;
+    padding: 8px 13px;
+    border-radius: 4px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    text-decoration: none;
+
+}
+.sign-in:hover{
+    cursor: pointer;
+    background-color: white;
+    transition: ease-in;
+    color: black;
+}
+.sign-up:hover{
+    cursor: pointer;
+    background-color: white;
+    transition: ease-in;
+    color: black;
+}
+
+.sign-up{
+background-color:  rgb(57, 73, 255);
+color:  rgb(255, 255, 255);
+padding: 8px 13px;
+gap: 20px;
+font-family: "Poppins", sans-serif;
+border: none;
+border-radius: 4px;
+text-decoration: none;
+font-weight: 400;
+}
+.ioio{
+    font-size: 30px;
+    display: none;
+    color: gray;
+}
+
+@media(max-width:768px){
+    .ioio{
+        display: flex;
+    }
+    
+}
+
+@media (max-width:768px){
+    .Links{
+        display: none;
+    }
+}
+.afternav{
+    background-color: rgb(39 39 42);
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    z-index: 50; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+   
+    font-weight: 800;
+}
+.tom{
+    margin-bottom: 30px;
+    
+    
+
+}
+.btnman{
+    margin-bottom: 30px;
+}
+
+.hidden{
+    display: none;
+}
+.block{
+    display: flex;
+}
