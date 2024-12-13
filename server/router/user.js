@@ -7,41 +7,43 @@ const authenticateToken=require("./userauth")
 
 router.post("/sign-up",async (req,res)=>{
     try {
-        const{username,email,address,password}=req.body
+     const {username,password,address,email}=req.body
 
-           
-        if(username.length<5){
-           return res.status(400).json({message:"Username should be more than 4 words"})
-        }
+     if(username.length<=4){
+      return res.status(404).json({Message:"Username should be greater than 4"})
+     }
 
-        const existingUser= await User.findOne({username:username})
-        if(existingUser){
-           return res.status(400).json({Message:"User already registered"})
-        }
-        
-        const existingemail= await User.findOne({email:email})
-        if(existingemail){
-            return res.status(400).json({Message:"Email already registered"})
-        }
+     const existinguser=await User.findOne({username:username})
+
+     if(existinguser){
+       return res.status(403).json({message:"Username already exist "})
+     }
        
-const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newUser= new User({
-            username:username,
-            email:email,
-            password:hashedPassword,
-            address:address
-        })
+     const existingemail=await User.findOne({email:email})
+     if(existingemail){
+       return res.status(403).json({message:"Email already registered"})
+     }
 
 
-       await newUser.save()
-          return res.status(200).json({ message: "User registered successfully"});
+const hashedpassword= await bcrypt.hash(password,10)
+
+const newuser= new User({
+    username:username,
+    email:email,
+    password:hashedpassword,
+    address:address
+})
+
+await newuser.save()
+return res.status(200).json({message:"User registered succesfully"})
+
 
 } catch(error) {
         console.log("error",error)
         return res.status(400).json({Message :"Server error"})
     }
 })
+
 
 router.post("/sign-in",async (req,res)=>{
     try {
@@ -50,10 +52,8 @@ router.post("/sign-in",async (req,res)=>{
         if(!existingUser){
             res.status(400).json({message:"Invalid credintials"})
         }
-
-
-
-       await bcrypt.compare(password,existingUser.password,(err,data)=>{
+      
+        await bcrypt.compare(password,existingUser.password,(err,data)=>{
         if(data){
 
             const authClaims=[
@@ -95,7 +95,7 @@ router.get("/get-user-information",authenticateToken,async(req,res)=>{
 router.put("/update-adddress",authenticateToken,async(req,res)=>{
     try {
         const {id}=req.headers;
-        const {adddress}=req.body;
+        const {address}=req.body;
         await User.findByIdAndUpdate(id,{address:address})
 
         return res.status(200).json({message:"upadtaed"})
@@ -106,3 +106,37 @@ router.put("/update-adddress",authenticateToken,async(req,res)=>{
 })
 
 module.exports=router;
+
+
+
+/*    const{username,email,address,password}=req.body
+
+           
+if(username.length<5){
+    return res.status(400).json({message:"Username should be more than 4 words"})
+ }
+
+ const existingUser= await User.findOne({username:username})
+ if(existingUser){
+    return res.status(400).json({Message:"User already registered"})
+ }
+ 
+ const existingemail= await User.findOne({email:email})
+ if(existingemail){
+     return res.status(400).json({Message:"Email already registered"})
+
+
+
+     const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser= new User({
+            username:username,
+            email:email,
+            password:hashedPassword,
+            address:address
+        })
+
+
+       await newUser.save()
+          return res.status(200).json({ message: "User registered successfully"});
+ }*/

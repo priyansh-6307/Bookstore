@@ -3,7 +3,7 @@ const User=require("../models/user")
 const jwt = require("jsonwebtoken")
 const authenticateToken=require("./userauth")
 const Book =require("../models/book")
-const book = require("../models/book")
+
 
 
 router.post("/add-book",authenticateToken,async(req,res)=>{
@@ -91,12 +91,13 @@ router.get("/get-recent- books"  , async(req,res)=>{
 
 router.get("/get-book-by-id/:id",async(req,res)=>{
     try{
-    const {id}=req.params
+    const {id}=req.params;
     const book=await Book.findById(id)
     res.status(200).json({Message:"Success",book})
 
 }
     catch (err){
+        console.log(err)
         res.status(404).json({message:"An error has occured"})
     }
 })
